@@ -106,6 +106,7 @@ extension PhotoMapViewController: MKMapViewDelegate {
             annotationView!.canShowCallout = true
             annotationView!.leftCalloutAccessoryView = UIImageView(frame: CGRect(x:0, y:0, width: 50, height:50))
             annotationView?.rightCalloutAccessoryView = UIButton(type: UIButtonType.DetailDisclosure)
+            annotationView!.image = resizeImage(originalImage)
         }
         
         let imageView = annotationView!.leftCalloutAccessoryView as! UIImageView
@@ -126,6 +127,21 @@ extension PhotoMapViewController: MKMapViewDelegate {
             photoVC?.selectedPhoto = originalImage
             print("set image")
         }
+    }
+    
+    func resizeImage(image: UIImage) -> UIImage {
+        var resizeRenderImageView = UIImageView(frame: CGRectMake(0, 0, 45, 45))
+        resizeRenderImageView.layer.borderColor = UIColor.whiteColor().CGColor
+        resizeRenderImageView.layer.borderWidth = 3.0
+        resizeRenderImageView.contentMode = UIViewContentMode.ScaleAspectFill
+        resizeRenderImageView.image = image
+        
+        UIGraphicsBeginImageContext(resizeRenderImageView.frame.size)
+        resizeRenderImageView.layer.renderInContext(UIGraphicsGetCurrentContext()!)
+        var thumbnail = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return thumbnail
     }
    
 }
