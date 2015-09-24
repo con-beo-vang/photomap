@@ -83,7 +83,6 @@ extension PhotoMapViewController: UIImagePickerControllerDelegate, UINavigationC
         vc.delegate = self
         presentViewController(nvc, animated: true, completion: nil)
         
-        
     }
 }
 
@@ -93,9 +92,6 @@ extension PhotoMapViewController: LocationsViewControllerDelegate {
         
         lat = latitude
         long = longitude
-        
-        
-
     }
 }
 
@@ -109,11 +105,27 @@ extension PhotoMapViewController: MKMapViewDelegate {
             annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseID)
             annotationView!.canShowCallout = true
             annotationView!.leftCalloutAccessoryView = UIImageView(frame: CGRect(x:0, y:0, width: 50, height:50))
+            annotationView?.rightCalloutAccessoryView = UIButton(type: UIButtonType.DetailDisclosure)
         }
         
         let imageView = annotationView!.leftCalloutAccessoryView as! UIImageView
-        imageView.image = UIImage(named: "camera")
+        imageView.image = originalImage
         
         return annotationView
     }
+    
+    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        print("photo detail")
+        performSegueWithIdentifier("showPhoto", sender: self)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let vc = segue.destinationViewController
+        if vc is PhotoViewController {
+            let photoVC = vc as? PhotoViewController
+            photoVC?.selectedPhoto = originalImage
+            print("set image")
+        }
+    }
+   
 }
