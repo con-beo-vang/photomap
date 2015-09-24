@@ -70,7 +70,6 @@
                                             <outlet property="addressLabel" destination="HUV-fK-4vy" id="y7U-Dk-vbn"/>
                                             <outlet property="categoryImageView" destination="rf7-oN-H0f" id="pMV-wp-j6T"/>
                                             <outlet property="nameLabel" destination="ubb-Dd-TaA" id="n0x-NA-9Xk"/>
-                                            <segue destination="iK3-7U-EWi" kind="show" id="zlK-HZ-v4f"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

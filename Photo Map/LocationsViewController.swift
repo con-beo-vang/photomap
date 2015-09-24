@@ -8,12 +8,18 @@
 
 import UIKit
 
+protocol LocationsViewControllerDelegate : class{
+    func locationsPickedLocation(controller: LocationsViewController, latitude: NSNumber, longitude: NSNumber)
+}
+
 class LocationsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
     var results: NSArray = []
+    
+    weak var delegate : LocationsViewControllerDelegate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,16 +74,8 @@ class LocationsViewController: UIViewController, UITableViewDelegate, UITableVie
             }
         }
     }
-
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-        var cell = sender as! UITableViewCell
-        var indexPath = tableView.indexPathForCell(cell)!
-        
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         // This is the selected venue
         var venue = results[indexPath.row] as! NSDictionary
         
@@ -88,6 +86,35 @@ class LocationsViewController: UIViewController, UITableViewDelegate, UITableVie
         var lngString = "\(lng)"
         
         print(latString + " " + lngString)
+        
+        delegate?.locationsPickedLocation(self, latitude: lat, longitude: lng)
+        print("dismiss")
+        dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+//        // Get the new view controller using segue.destinationViewController.
+//        // Pass the selected object to the new view controller.
+//        var cell = sender as! UITableViewCell
+//        var indexPath = tableView.indexPathForCell(cell)!
+//        
+//        // This is the selected venue
+//        var venue = results[indexPath.row] as! NSDictionary
+//        
+//        var lat = venue.valueForKeyPath("location.lat") as! NSNumber
+//        var lng = venue.valueForKeyPath("location.lng") as! NSNumber
+//        
+//        var latString = "\(lat)"
+//        var lngString = "\(lng)"
+//        
+//        print(latString + " " + lngString)
+//        
+//        delegate?.locationsPickedLocation(self, latitude: lat, longitude: lng)
+//        print("dismiss")
+//        dismissViewControllerAnimated(true, completion: nil)
+//    }
 
 }
