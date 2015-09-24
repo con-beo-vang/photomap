@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1869F2101BB42264001D5F2E /* PhotoMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1869F20F1BB42264001D5F2E /* PhotoMapViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		1869F2121BB42381001D5F2E /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1869F2111BB42381001D5F2E /* MapKit.framework */; };
+		1869F2181BB42B54001D5F2E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1869F2161BB42B54001D5F2E /* Main.storyboard */; settings = {ASSET_TAGS = (); }; };
 		228D474F19F5DA9F00DE9903 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228D474E19F5DA9F00DE9903 /* AppDelegate.swift */; };
-		228D475419F5DA9F00DE9903 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 228D475219F5DA9F00DE9903 /* Main.storyboard */; };
 		228D475619F5DA9F00DE9903 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 228D475519F5DA9F00DE9903 /* Images.xcassets */; };
 		228D475919F5DA9F00DE9903 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 228D475719F5DA9F00DE9903 /* LaunchScreen.xib */; };
 		228D476519F5DAA000DE9903 /* Photo_MapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228D476419F5DAA000DE9903 /* Photo_MapTests.swift */; };
@@ -28,11 +30,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1869F20F1BB42264001D5F2E /* PhotoMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoMapViewController.swift; sourceTree = "<group>"; };
+		1869F2111BB42381001D5F2E /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		1869F2171BB42B54001D5F2E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2258D28219F5E60100F013CE /* Photo Map-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Photo Map-Bridging-Header.h"; sourceTree = "<group>"; };
 		228D474919F5DA9F00DE9903 /* Photo Map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Photo Map.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		228D474D19F5DA9F00DE9903 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		228D474E19F5DA9F00DE9903 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		228D475319F5DA9F00DE9903 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		228D475519F5DA9F00DE9903 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		228D475819F5DA9F00DE9903 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		228D475E19F5DAA000DE9903 /* Photo MapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Photo MapTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -50,6 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1869F2121BB42381001D5F2E /* MapKit.framework in Frameworks */,
 				B2CD157BA08A8D660CF7C256 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -87,10 +92,10 @@
 		228D474B19F5DA9F00DE9903 /* Photo Map */ = {
 			isa = PBXGroup;
 			children = (
+				1869F2161BB42B54001D5F2E /* Main.storyboard */,
 				22BB9BD319F5DCE9000048C2 /* Views */,
 				228D476E19F5DAA800DE9903 /* View Controllers */,
 				228D474E19F5DA9F00DE9903 /* AppDelegate.swift */,
-				228D475219F5DA9F00DE9903 /* Main.storyboard */,
 				228D475519F5DA9F00DE9903 /* Images.xcassets */,
 				228D475719F5DA9F00DE9903 /* LaunchScreen.xib */,
 				228D474C19F5DA9F00DE9903 /* Supporting Files */,
@@ -128,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				228D476F19F5DAFF00DE9903 /* LocationsViewController.swift */,
+				1869F20F1BB42264001D5F2E /* PhotoMapViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -152,6 +158,7 @@
 		C53175EB32E8EEC8585BFFB2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1869F2111BB42381001D5F2E /* MapKit.framework */,
 				730E2E8CC4461B1A4DAF2DD6 /* libPods.a */,
 			);
 			name = Frameworks;
@@ -241,7 +248,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				228D475419F5DA9F00DE9903 /* Main.storyboard in Resources */,
+				1869F2181BB42B54001D5F2E /* Main.storyboard in Resources */,
 				228D475919F5DA9F00DE9903 /* LaunchScreen.xib in Resources */,
 				228D475619F5DA9F00DE9903 /* Images.xcassets in Resources */,
 			);
@@ -296,6 +303,7 @@
 			files = (
 				22BB9BD519F5DD21000048C2 /* LocationCell.swift in Sources */,
 				228D474F19F5DA9F00DE9903 /* AppDelegate.swift in Sources */,
+				1869F2101BB42264001D5F2E /* PhotoMapViewController.swift in Sources */,
 				228D477019F5DAFF00DE9903 /* LocationsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -319,10 +327,10 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		228D475219F5DA9F00DE9903 /* Main.storyboard */ = {
+		1869F2161BB42B54001D5F2E /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				228D475319F5DA9F00DE9903 /* Base */,
+				1869F2171BB42B54001D5F2E /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

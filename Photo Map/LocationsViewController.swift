@@ -17,6 +17,8 @@ class LocationsViewController: UIViewController, UITableViewDelegate, UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        fetchLocations("Ho Chi Minh City", near: "Vung Tau")
 
         tableView.dataSource = self
         tableView.delegate = self
