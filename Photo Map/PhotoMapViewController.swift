@@ -37,46 +37,35 @@ class PhotoMapViewController: UIViewController {
         
         vc.delegate = self
         vc.allowsEditing = true
-//        if UIImagePickerController.isSourceTypeAvailable(sourceType: UIImagePickerControllerSourceType)
         vc.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-        
-        
-        
         
     }
     
     override func viewWillAppear(animated: Bool) {
         print("view will appear")
-        if lat != nil && long != nil {
+        if let lat = lat, long = long {
             let annotation = MKPointAnnotation()
-            annotation.coordinate = CLLocationCoordinate2D(latitude: lat!.doubleValue, longitude: long!.doubleValue)
-            annotation.title = "Picture!"
+            annotation.coordinate = CLLocationCoordinate2D(latitude: lat.doubleValue, longitude: long.doubleValue)
+//            annotation.title = "Picture!"
+            annotation.title = "\(lat)"
             mapView.addAnnotation(annotation)
             print("lat: \(lat)")
             print("long: \(long)")
-            mapView.setRegion(MKCoordinateRegionMake(CLLocationCoordinate2DMake(lat!.doubleValue, long!.doubleValue), MKCoordinateSpanMake(0.1, 0.1)), animated: false)
+            mapView.setRegion(MKCoordinateRegionMake(CLLocationCoordinate2DMake(lat.doubleValue, long.doubleValue), MKCoordinateSpanMake(0.1, 0.1)), animated: false)
         }
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
     @IBAction func onCameraButton(sender: UIButton) {
         self.presentViewController(vc, animated: true, completion: nil)
-
     }
 }
 
 extension PhotoMapViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
-                    originalImage = editingInfo![UIImagePickerControllerOriginalImage] as! UIImage
+        originalImage = editingInfo![UIImagePickerControllerOriginalImage] as! UIImage
 //        editedImage = editingInfo![UIImagePickerControllerEditedImage] as! UIImage
         
         dismissViewControllerAnimated(true, completion: nil)
-        
         
         let nvc = storyboard?.instantiateViewControllerWithIdentifier("locationNVC") as! UINavigationController
         let vc = nvc.viewControllers[0] as! LocationsViewController
@@ -96,7 +85,7 @@ extension PhotoMapViewController: LocationsViewControllerDelegate {
 }
 
 extension PhotoMapViewController: MKMapViewDelegate {
-    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         
         let reuseID = "myAnnotationView"
         
@@ -130,7 +119,7 @@ extension PhotoMapViewController: MKMapViewDelegate {
     }
     
     func resizeImage(image: UIImage) -> UIImage {
-        var resizeRenderImageView = UIImageView(frame: CGRectMake(0, 0, 45, 45))
+        let resizeRenderImageView = UIImageView(frame: CGRectMake(0, 0, 45, 45))
         resizeRenderImageView.layer.borderColor = UIColor.whiteColor().CGColor
         resizeRenderImageView.layer.borderWidth = 3.0
         resizeRenderImageView.contentMode = UIViewContentMode.ScaleAspectFill
@@ -138,7 +127,7 @@ extension PhotoMapViewController: MKMapViewDelegate {
         
         UIGraphicsBeginImageContext(resizeRenderImageView.frame.size)
         resizeRenderImageView.layer.renderInContext(UIGraphicsGetCurrentContext()!)
-        var thumbnail = UIGraphicsGetImageFromCurrentImageContext()
+        let thumbnail = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
         return thumbnail

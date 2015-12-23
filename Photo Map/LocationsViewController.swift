@@ -41,7 +41,7 @@ class LocationsViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("LocationCell") as! LocationCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("LocationCell") as! LocationCell
         
         cell.location = results[indexPath.row] as! NSDictionary
         
@@ -49,7 +49,7 @@ class LocationsViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func searchBar(searchBar: UISearchBar, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
-        var newText = NSString(string: searchBar.text!).stringByReplacingCharactersInRange(range, withString: text)
+        let newText = NSString(string: searchBar.text!).stringByReplacingCharactersInRange(range, withString: text)
         fetchLocations(newText)
         
         return true
@@ -60,15 +60,13 @@ class LocationsViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func fetchLocations(query: String, near: String = "Sunnyvale") {
-        var url = "https://api.foursquare.com/v2/venues/search?client_id=QA1L0Z0ZNA2QVEEDHFPQWK0I5F1DE3GPLSNW4BZEBGJXUCFL&client_secret=W2AOE1TYC4MHK5SZYOUGX0J3LVRALMPB4CXT3ZH21ZCPUMCU&v=20141020&near=\(near),CA&query=\(query.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)"
-        var request = NSURLRequest(URL: NSURL(string: url)!)
+        let url = "https://api.foursquare.com/v2/venues/search?client_id=QA1L0Z0ZNA2QVEEDHFPQWK0I5F1DE3GPLSNW4BZEBGJXUCFL&client_secret=W2AOE1TYC4MHK5SZYOUGX0J3LVRALMPB4CXT3ZH21ZCPUMCU&v=20141020&near=\(near),CA&query=\(query.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)"
+        let request = NSURLRequest(URL: NSURL(string: url)!)
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) { (response: NSURLResponse?, data: NSData?, error: NSError?) -> Void in
             if (data != nil) {
                 
-                var responseDictionary = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments)
-                
-                
-                
+                let responseDictionary = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments)
+              
                 self.results = responseDictionary.valueForKeyPath("response.venues") as! NSArray
                 self.tableView.reloadData()
             }
@@ -77,13 +75,13 @@ class LocationsViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         // This is the selected venue
-        var venue = results[indexPath.row] as! NSDictionary
+        let venue = results[indexPath.row] as! NSDictionary
         
-        var lat = venue.valueForKeyPath("location.lat") as! NSNumber
-        var lng = venue.valueForKeyPath("location.lng") as! NSNumber
+        let lat = venue.valueForKeyPath("location.lat") as! NSNumber
+        let lng = venue.valueForKeyPath("location.lng") as! NSNumber
         
-        var latString = "\(lat)"
-        var lngString = "\(lng)"
+        let latString = "\(lat)"
+        let lngString = "\(lng)"
         
         print(latString + " " + lngString)
         

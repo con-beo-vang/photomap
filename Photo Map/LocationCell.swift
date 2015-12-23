@@ -19,13 +19,13 @@ class LocationCell: UITableViewCell {
             nameLabel.text = location["name"] as? String
             addressLabel.text = location.valueForKeyPath("location.address") as? String
             
-            var categories = location["categories"] as? NSArray
+            let categories = location["categories"] as? NSArray
             if (categories != nil && categories!.count > 0) {
-                var category = categories![0] as! NSDictionary
-                var urlPrefix = category.valueForKeyPath("icon.prefix") as! String
-                var urlSuffix = category.valueForKeyPath("icon.suffix") as! String
+                let category = categories![0] as! NSDictionary
+                let urlPrefix = category.valueForKeyPath("icon.prefix") as! String
+                let urlSuffix = category.valueForKeyPath("icon.suffix") as! String
                 
-                var url = "\(urlPrefix)bg_32\(urlSuffix)"
+                let url = "\(urlPrefix)bg_32\(urlSuffix)"
                 categoryImageView.setImageWithURL(NSURL(string: url))
             }
         }
