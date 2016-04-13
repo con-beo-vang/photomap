@@ -14,10 +14,13 @@ class PhotoMapViewController: UIViewController {
     
     var editedImage: UIImage!
     var originalImage: UIImage!
-    
+    var newImage: UIImage!
+  
     var lat: NSNumber?
     var long: NSNumber?
-    
+  
+  var images = [String: UIImage]()
+  
     @IBOutlet weak var mapView: MKMapView!
     
     @IBOutlet weak var cameraButton: UIButton!
@@ -81,6 +84,9 @@ extension PhotoMapViewController: LocationsViewControllerDelegate {
         
         lat = latitude
         long = longitude
+      
+        let key = "\(lat), \(long)"
+        images[key] = originalImage!
     }
 }
 
@@ -90,30 +96,36 @@ extension PhotoMapViewController: MKMapViewDelegate {
         let reuseID = "myAnnotationView"
         
         var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseID)
-        if (annotationView == nil) {
-            annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseID)
+        if annotationView == nil {
+            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseID)
             annotationView!.canShowCallout = true
             annotationView!.leftCalloutAccessoryView = UIImageView(frame: CGRect(x:0, y:0, width: 50, height:50))
             annotationView?.rightCalloutAccessoryView = UIButton(type: UIButtonType.DetailDisclosure)
-            annotationView!.image = resizeImage(originalImage)
         }
-        
-        let imageView = annotationView!.leftCalloutAccessoryView as! UIImageView
-        imageView.image = originalImage
-        
+      let key = "\(lat), \(long)"
+      let image = images[key]
+      annotationView!.image = resizeImage(image!)
+      let imageView = annotationView!.leftCalloutAccessoryView as! UIImageView
+      imageView.image = image
+      
+      
         return annotationView
     }
     
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         print("photo detail")
-        performSegueWithIdentifier("showPhoto", sender: self)
+        if let imageView = view.leftCalloutAccessoryView as? UIImageView {
+          newImage = imageView.image
+          performSegueWithIdentifier("showPhoto", sender: self)
+        }
+      
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let vc = segue.destinationViewController
         if vc is PhotoViewController {
             let photoVC = vc as? PhotoViewController
-            photoVC?.selectedPhoto = originalImage
+            photoVC?.selectedPhoto = newImage
             print("set image")
         }
     }
